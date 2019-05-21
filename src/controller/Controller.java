@@ -36,65 +36,6 @@ public class Controller {
 	// Componente vista (consola)
 	private MovingViolationsManagerView view;
 
-	//TODO Definir los atributos de estructuras de datos del modelo del mundo del proyecto
-
-	public static final String rutaEnero = "./data/January_wgs84_corregido.csv";
-
-	/**
-	 * Ruta de archivo CSV Febrero.
-	 */
-	public static final String rutaFebrero = "./data/February_wgs84.csv";
-
-	/**
-	 * Ruta de archivo CSV Marzo.
-	 */
-	public static final String rutaMarzo = "./data/March_wgs84.csv";
-
-	/**
-	 * Ruta de archivo CSV Abril.
-	 */
-	public static final String rutaAbril = "./data/Abril_wgs84.csv";
-
-	/**
-	 * Ruta de archivo CSV Mayo.
-	 */
-	public static final String rutaMayo = "./data/May_wgs84.csv";
-	/**
-	 * Ruta de archivo CSV Junio.
-	 */
-	public static final String rutaJunio = "./data/June_wgs84.csv";
-	/**
-	 * Ruta de archivo CSV Julio.
-	 */
-	public static final String rutaJulio = "./data/July_wgs84.csv";
-	/**
-	 * Ruta de archivo CSV Agosto.
-	 */
-	public static final String rutaAgosto = "./data/August_wgs84.csv";
-	/**
-	 * Ruta de archivo CSV Septiembre.
-	 */
-	public static final String rutaSeptiembre = "./data/September_wgs84.csv";
-	/**
-	 * Ruta de archivo CSV Octubre.
-	 */
-	public static final String rutaOctubre = "./data/October_wgs84.csv";
-	/**
-	 * Ruta de archivo CSV Noviembre.
-	 */
-	public static final String rutaNoviembre = "./data/November_wgs84.csv";
-	/**
-	 * Ruta de archivo CSV Diciembre.
-	 */
-	public static final String rutaDiciembre = "./data/December_wgs84.csv";
-
-
-	private String[] sem1;
-
-	private String[] sem2;
-
-	private ArregloDinamico<VOMovingViolations> arreglo;
-
 	private ArregloDinamico<Long> arregloIdsGrafo;
 
 	//	private boolean empezo;
@@ -115,10 +56,6 @@ public class Controller {
 
 	private ArregloDinamico<Vertex<Long,String,Double>> cuadricula;
 
-
-	private Comparable[] muestraVertices;
-	private Comparable[] muestra;
-
 	private MaxHeapCP<Vertex<Long, String, Double>> heap;
 
 	public static final double R = 6372.8;
@@ -128,7 +65,6 @@ public class Controller {
 	public Controller()
 	{
 		view = new MovingViolationsManagerView();
-		arreglo = new ArregloDinamico<VOMovingViolations>(100);
 		grafo = new Graph<Long, String, Double>();	
 		arregloIdsGrafo=new ArregloDinamico<>(3000);
 		heap= new MaxHeapCP<>();
@@ -666,7 +602,94 @@ public class Controller {
 	 * @param  int n: numero de vertices con mayor numero de infracciones  
 	 */
 	public void mayorNumeroVerticesA2(int n) {
-		// TODO Auto-generated method stub
+		
+//		ArregloDinamico<Vertex<Long, String, Double>> mayores= new ArregloDinamico<>(20);
+//		for(int i=0;i<n;i++)
+//		{
+//			Vertex<Long, String, Double> v= heap.delMax();
+//			mayores.agregar(v);
+//			System.out.println(v.darInfoVertice());
+//		}
+//		Graph<Long,String,Double> grafo1= new Graph<>();
+//		for (int i = 0; i < mayores.darTamano(); i++)
+//		{
+//			Vertex<Long, String, Double> v = mayores.darElem(i);
+//			grafo1.addVertex(v.getId(), v.getLatitud()+"|"+v.getLongitud(), v.getInfracciones(),v.getIds());
+//		}
+//		LinearProbing<Long, Vertex<Long,String,Double>> lin= grafo1.getV();
+//		LinearProbing<Long, Vertex<Long,String,Double>> linGrande= grafo.getV();
+//		Iterator <Long> it = linGrande.keys();
+//		while(it.hasNext())
+//		{
+//			Long i= it.next();
+//			if(lin.get(i)!=null)
+//			{
+//				Vertex<Long, String, Double> vertice=linGrande.get(i);
+//				Bag<Long> adjs= vertice.getIds();
+//				for(Long a: adjs)
+//				{
+//					if(lin.get(a)!=null)
+//					{
+//						Vertex<Long, String, Double> verticeFin=lin.get(a);
+//						double peso= haversine(Double.parseDouble(vertice.getLatitud()), Double.parseDouble(vertice.getLongitud()), Double.parseDouble(verticeFin.getLatitud()), Double.parseDouble(verticeFin.getLongitud()));
+//						grafo1.addEdge(vertice.getId(), verticeFin.getId(), peso);
+//					}
+//				}
+//			}
+//		}
+//		LinearProbing<Long, Boolean> marked = new LinearProbing<Long, Boolean>(grafo1.V());
+//		Iterator<Long> itt = lin.keys();
+//		while(itt.hasNext())
+//		{
+//			Long i = itt.next();
+//			marked.put(i, false);
+//		}
+//		Iterator<Long> ite= marked.keys();
+//		int componentes = 0;
+//		MaxHeapCP<Bag<Long>> h= new MaxHeapCP<Bag<Long>>();
+//		while(ite.hasNext())
+//		{
+//			Long a = ite.next();
+//			if(marked.get(a)==false)
+//			{
+//				componentes++;
+//				DFS<Long,String,Double> d= new DFS<Long, String, Double>(grafo1, a, marked);
+//				marked= d.darMarcados();
+//				h.agregar(d.darBagDeVertices());
+//			}
+//		}
+//		Bag<Long> max = h.delMax();
+//		for(Long d: max)
+//		{
+//			String lat=linGrande.get(d).getLatitud();
+//			String lon=linGrande.get(d).getLongitud();
+//			ArregloDinamico<String> arr = linGrande.get(d).getInfracciones();
+//			Bag<Long> b = linGrande.get(d).getIds();
+//			grafo3.addVertex(d, lat+"|"+lon, arr, b);
+//		}
+//		LinearProbing<Long, Vertex<Long, String, Double>> ie = grafo3.getV();
+//		Iterator<Long> i = ie.keys();
+//		while(i.hasNext())
+//		{
+//			Long a = i.next();
+//			Vertex<Long, String, Double> ver = ie.get(a);
+//			Bag<Long> ba = ver.getIds();
+//			for(long b:ba)
+//			{
+//				if(ie.get(b)!=null)
+//				{
+//					Vertex<Long, String, Double> ver2 = ie.get(b);
+//					double peso= haversine(Double.parseDouble(ver.getLatitud()), Double.parseDouble(ver.getLongitud()), Double.parseDouble(ver2.getLatitud()), Double.parseDouble(ver2.getLongitud()));
+//					grafo3.addEdge(a, b, peso);
+//				}
+//			}
+//		}
+//		System.out.println("Vertices "+grafo3.V());
+//		System.out.println("Arcos "+grafo3.E());
+//		//en el bag estan los vertices del componente conexo mayor
+//		System.out.println("Numeros de componentes: "+componentes);
+//		
+		
 		RedBlackBST<Long, Long> r= new RedBlackBST<>();
 		grafo3= new Graph<>();
 		ArregloDinamico<Vertex<Long, String, Double>> mayores= new ArregloDinamico<>(20);
@@ -721,7 +744,7 @@ public class Controller {
 			{
 				if(lin.get(q)!=null)
 				{
-					grafo1.addEdge(r1, q, 0.0);
+					grafo1.addEdge(r1, q, grafo.getInfoEdge(r1, q));
 				}
 			}
 		}
@@ -969,31 +992,24 @@ public class Controller {
 	{
 		// TODO Auto-generated method stub
 		grafoR8.crearTablas();
-		
-		DijkstraSP d= null;
-		Vertex<Long, String, Double> e = null;
-		e = cuadricula.darElem(0);
-		d= new DijkstraSP(grafoR8, e.getId());
-		Iterable<Edge<Long, String, Double>> ed = d.pathTo(grafoR8.getIndiceT().get(e.getId()));
-		Iterator<Edge<Long, String, Double>> it = ed.iterator();
+		Vertex<Long, String, Double> e = cuadricula.darElem(0);
+		DijkstraSP d= new DijkstraSP(grafoR8, e.getId());
 
 		for(int i=1;i<cuadricula.darTamano();i++)
 		{
-
-			e = cuadricula.darElem(i);
-			ed = d.pathTo(grafoR8.getIndiceT().get(e.getId()));
-			it = ed.iterator();
-
+			Iterable<Edge<Long, String, Double>> ed = d.pathTo(grafoR8.getIndiceT().get(cuadricula.darElem(i).getId()));
+			Iterator<Edge<Long, String, Double>> it = ed.iterator();
+			MapBoxDraw map = new MapBoxDraw("./docs/req8."+i+".html", ed, grafoR8);
+			map.drawIterable();
 			while(it.hasNext())
 			{
 				Edge<Long, String, Double> n = it.next();
 				System.out.println(n.toString());
 			}
-		
 			System.out.println("----------------");
 		}
-		MapBoxDraw map8 = new MapBoxDraw("./docs/req8.html", ed, grafoR8);
-		map8.drawIterable();
+//		MapBoxDraw map8 = new MapBoxDraw("./docs/req8.html", ed, grafoR8);
+//		map8.drawIterable();
 	}
 
 	// TODO El tipo de retorno de los m�todos puede ajustarse seg�n la conveniencia
